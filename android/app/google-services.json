@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "635290850123",
+    "project_id": "wallpapers-app-3dd74",
+    "storage_bucket": "wallpapers-app-3dd74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635290850123:android:bd448e269819e82ce24ece",
+        "android_client_info": {
+          "package_name": "com.metafycial.apps.wallpapers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAaG4Pb-i17Eq_MSMwt74S6DgZHJ69Njg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
