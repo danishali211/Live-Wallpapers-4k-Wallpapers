@@ -1,9 +1,13 @@
 // ignore_for_file: sized_box_for_whitespace, deprecated_member_use
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wallpaper_app/app_module/grid_screens/gridview_screen.dart';
+import 'package:wallpaper_app/app_module/menu_detail/controller/menu_detail_view.dart';
 
 import '../../../../utils/constants/images_string.dart';
 import '../../../../utils/theme/app_color.dart';
@@ -72,72 +76,73 @@ Widget gridView(data) {
   return GridView.builder(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 30),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          mainAxisSpacing: 17,
-          crossAxisSpacing: 15,
-          crossAxisCount: 3,
-          childAspectRatio: .580),
+        mainAxisSpacing: 7,
+        crossAxisSpacing: 15,
+        crossAxisCount: 3,
+        mainAxisExtent: 250,
+      ),
       itemCount: mainMenuList.length,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           onTap: () {
             AppImages.menuIndex = index;
+
+
+            ///Index 0 has Live wallpapers in our app
+            ///to apply live wallpapers we have to make the flag 'isLive=true'
+            ///for static wallpaper we have to make the 'isLive=false'
             if (index == 0) {
+              // Get.put(MenuDetailController()).showInterstitialAd();
               AppImages.selectedCategory = "Wallpaper";
-              type = "offline";
-              Get.toNamed("/menu_detail", arguments: [
-                mainMenuList[index]["title"],
-                data[0].data()["url"],
-                index,
-              ]);
+              type = "Live";
+              Get.to(
+                () => GridViewScreens(
+                  source: data[1].data()["url"],
+                  title: mainMenuList[index]["title"],
+                  isLive: true,
+                ),
+              );
             } else if (index == 1) {
+              // Get.put(MenuDetailController()).showInterstitialAd();
               AppImages.selectedCategory = "Wallpaper";
               type = "live";
-              Get.toNamed("/menu_detail", arguments: [
-                mainMenuList[index]["title"],
-                data[1].data()["url"],
-                index
-              ]);
-            } else if (index == 2) {
-              if (data[2].data()["keyboard"] != "") {
-                launch(data[2].data()["keyboard"]);
-              }
-            } else if (index == 3) {
-              if (data[2].data()["premium"] != "") {
-                launch(data[2].data()["premium"]);
-              }
-            } else if (index == 4) {
-              // if (data[2].data()["call"] != "") {
-              //   launch(data[2].data()["call"]);
-              // }
-              AppImages.selectedCategory = "Call Wallpaper";
-              Get.toNamed("/menu_detail", arguments: [
-                mainMenuList[index]["title"],
-                data[0].data()["url"],
-                index,
-              ]);
+
+              Get.to(
+                () => GridViewScreens(
+                  source: data[0].data()["url"],
+                  title: mainMenuList[index]["title"],
+                  isLive: false,
+                ),
+              );
+            } else if (index >= 2) {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Comming Soon!!!'),
+                  content: const Text(
+                      'We are working on it.Soon in upcoming versions we will add these functionalities'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Ok'),
+                    ),
+                  ],
+                ),
+              );
             }
           },
-          // mainMenuList[index]["onTap"],
-
           child: Column(
             children: [
-              // Text('dsafdsfas'),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child:
-                    SizedBox(child: Image.asset(mainMenuList[index]["icon"])),
+                child: Image.asset(
+                  mainMenuList[index]["icon"],
+                  fit: BoxFit.cover,
+                  height: 200,
+                ),
               ),
-              SizedBox(
-                height: 5,
-              ),
-              // Container(
-              //   color: Colors.green,
-              //     child: appText(text: mainMenuList[index]["title"], size: 12)
-              // )
-              Container(
-                // color: Colors.green,
-                child: Text('${mainMenuList[index]["title"]}'),
-              )
+              const SizedBox(height: 5),
+              Text('${mainMenuList[index]["title"]}')
             ],
           ),
         );
@@ -183,9 +188,14 @@ Widget drawer(data) {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: index == 0
-                    ? () {
-                        if (data[2].data()["rate"] != "") {
-                          launch(data[2].data()["rate"]);
+                    ? () async {
+                        // Example, rate us : https://play.google.com/store/apps/details?id=+PACKAGE NAME
+                        const url =
+                            'https://play.google.com/store/apps/details?id=com.metafycial.apps.wallpaperapp';
+                        if (await canLaunch(url)) {
+                          await launch(url);
+                        } else {
+                          throw 'Could not launch $url';
                         }
                       }
                     : index == 1

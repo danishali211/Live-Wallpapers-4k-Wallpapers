@@ -20,9 +20,13 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
+    Future.delayed(
+        const Duration(seconds: 3),
+            () =>
     getAllUserData(onChange: (onChange) {
       Get.offNamed("/home", arguments: onChange);
-    });
+    })
+    );
     // Timer(const Duration(seconds: 2), () {});
     super.initState();
   }

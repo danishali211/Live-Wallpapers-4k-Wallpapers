@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 // import 'package:wallpaper/services/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:wallpaper_app/app_module/menu_detail/controller/menu_detail_view.dart';
 import 'package:wallpaper_app/services/Network/BindingNetwork/binding_network.dart';
 import 'package:wallpaper_app/services/routes/routes.dart';
 import 'package:motion/motion.dart';
@@ -15,6 +16,9 @@ AppOpenAd? openAd;
 Future<void> loadAd() async {
   await AppOpenAd.load(
       adUnitId: "ca-app-pub-1842648639714248/5622107789",
+      //
+      // test ad id down
+    // adUnitId: 'ca-app-pub-3940256099942544/9257395921',
       request: const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(
         onAdLoaded: (ad) {
@@ -40,6 +44,8 @@ Future<void> main() async {
   /// Globally set Motion's update interval to 60 frames per second.
   Motion.instance.setUpdateInterval(60.fps);
   await loadAd();
+  final adController = Get.put(MenuDetailController());
+  adController.loadInterstitialAd();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }

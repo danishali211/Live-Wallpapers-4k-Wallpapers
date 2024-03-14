@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:wallpaper_app/app_module/menu_detail/controller/menu_detail_view.dart';
 // import 'package:wallpaper/app_module/home/view/components/home_components.dart';
 // import 'package:wallpaper/services/ads/ads_services.dart';
 // import 'package:wallpaper/utils/theme/app_color.dart';
@@ -34,6 +35,8 @@ class _HomeViewState extends State<HomeView> {
     print("+++Inhomescreen");
     _createBannerAd();
     _cacheImages();
+    Get.put(MenuDetailController()).loadInterstitialAd();
+
     super.initState();
   }
 
@@ -47,24 +50,44 @@ class _HomeViewState extends State<HomeView> {
   }
 
   _cacheImages() async {
+    // final data = Get.arguments;
+    // final urls = data[1].data()["url"];
+    // final urlsGif = data[0].data()["url"];
+    // print('cache images1 ${urls}');
+    // print('cache images2 ${urlsGif}');
+    // for (var images in urls) {
+    //   precacheImage(CachedNetworkImageProvider(images['thumbnail']), context);
+    // }
+    // for (var images in urls) {
+    //   precacheImage(CachedNetworkImageProvider(images['wallpaper']), context);
+    // }
+    // for (var images in urlsGif) {
+    //   precacheImage(CachedNetworkImageProvider(images['thumbnail']), context);
+    // }
+    // for (var images in urlsGif) {
+    //   precacheImage(CachedNetworkImageProvider(images['wallpaper']), context);
+    // }
+    // log('Images Cached');
     final data = Get.arguments;
     final urls = data[1].data()["url"];
     final urlsGif = data[0].data()["url"];
+    print('cache images1 ${urls}');
+    print('cache images2 ${urlsGif}');
 
-    for (var images in urls) {
-      precacheImage(CachedNetworkImageProvider(images['thumbnail']), context);
-    }
+    try {
+      for (var images in urls) {
+        precacheImage(CachedNetworkImageProvider(images['thumbnail']), context);
+        precacheImage(CachedNetworkImageProvider(images['wallpaper']), context);
+      }
 
-    for (var images in urls) {
-      precacheImage(CachedNetworkImageProvider(images['wallpaper']), context);
+      for (var images in urlsGif) {
+        precacheImage(CachedNetworkImageProvider(images['thumbnail']), context);
+        precacheImage(CachedNetworkImageProvider(images['wallpaper']), context);
+      }
+      print('Images Cached');
+    } catch (e) {
+      print('Error precaching images: $e');
     }
-    for (var images in urlsGif) {
-      precacheImage(CachedNetworkImageProvider(images['thumbnail']), context);
-    }
-    for (var images in urlsGif) {
-      precacheImage(CachedNetworkImageProvider(images['wallpaper']), context);
-    }
-    log('Images Cached');
   }
 
   @override

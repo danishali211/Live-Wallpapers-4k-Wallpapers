@@ -5,13 +5,13 @@ import '../../../utils/constants/images_string.dart';
 
 List mainMenuList = [
   {
-    "icon": AppImages.GRID_01,
-    "title": "Apply wallpaper",
+    "icon": AppImages.GRID_02,
+    "title": "Live Wallpaper",
     "onTap": () {},
   },
   {
-    "icon": AppImages.GRID_02,
-    "title": "Live wallpaper",
+    "icon": AppImages.GRID_01,
+    "title": "Animated Wallpaper",
     "onTap": () {},
   },
   {

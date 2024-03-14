@@ -5,14 +5,14 @@ class AppImages {
 
   static String SPLASH_BG = "assets/images/bg.png";
   static String SPLASH_TEXT = "assets/images/splash_text.png";
-  static String GRID_01 = "assets/images/2.png";
-  static String GRID_02 = "assets/images/1.png";
+  static String GRID_01 = "assets/images/jsa.png";
+  static String GRID_02 = "assets/images/jajo.JPG";
   static String GRID_03 = "assets/images/3.png";
   static String GRID_04 = "assets/images/4.png";
   static String GRID_05 = "assets/images/5.png";
 
-  static String MENU_01 = "assets/images/01.png";
-  static String MENU_02 = "assets/images/02.png";
+  static String MENU_01 = "assets/images/jsa.png";
+  static String MENU_02 = "assets/images/jajo.png";
   static String MENU_03 = "assets/images/03.png";
   static String MENU_04 = "assets/images/04.png";
   static String MENU_05 = "assets/images/05.png";

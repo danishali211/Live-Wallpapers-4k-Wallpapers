@@ -22,10 +22,10 @@ class MyRoutes {
       name: '/home',
       page: () => const HomeView(),
     ),
-    GetPage(
-      name: '/menu_detail',
-      page: () =>  MenuDetailView(),
-    ),
+    // GetPage(
+    //   name: '/menu_detail',
+    //   page: () =>  MenuDetailView(),
+    // ),
     GetPage(
       name: '/wallpaper_detail',
       page: () => const WallpaperView(),
@@ -34,10 +34,10 @@ class MyRoutes {
       name: '/privacy',
       page: () => const PrivacyView(),
     ),
-    GetPage(
-      name: '/setWallpaper',
-      arguments: imageUrl,
-      page: () =>  AndrewOverview(),
-    ),
+    // GetPage(
+    //   name: '/setWallpaper',
+    //   arguments: imageUrl,
+    //   page: () =>  AndrewOverview(),
+    // ),
   ];
 }

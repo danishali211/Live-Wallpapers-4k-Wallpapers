@@ -8,6 +8,7 @@ class AdMobServices {
   static String? get bannerAdUnitId {
     if (Platform.isAndroid) {
       return "ca-app-pub-1842648639714248/1834071867";
+
     } else if (Platform.isIOS) {
       return "cca-app-pub-1842648639714248/1834071867";
     }
